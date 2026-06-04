@@ -83,6 +83,7 @@ h1 {
 
 .choice-list {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   min-width: 0;
   margin: 0;
@@ -92,6 +93,7 @@ h1 {
 
 legend,
 .field > span {
+  grid-column: 1 / -1;
   display: block;
   margin-bottom: 8px;
   color: #2f3d38;
@@ -100,23 +102,31 @@ legend,
 }
 
 .choice-row {
+  position: relative;
   display: grid;
   justify-items: center;
   align-items: center;
-  min-height: 58px;
-  padding: 10px 14px;
+  gap: 6px;
+  min-height: 108px;
+  padding: 12px 8px;
   border: 2px solid #d9d0c2;
   border-radius: 8px;
   background: #fffdf8;
   color: #25302c;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 800;
+  text-align: center;
 }
 
 .choice-row input {
-  width: 24px;
-  height: 24px;
-  accent-color: #2d6a5f;
+  position: absolute;
+  opacity: 0;
+}
+
+.choice-row:has(input:checked) {
+  border-color: #2d6a5f;
+  background: #e9f5ef;
+  box-shadow: inset 0 0 0 2px rgba(45, 106, 95, 0.14);
 }
 
 .choice-icon,
@@ -178,7 +188,8 @@ legend,
 }
 
 .action-stack,
-.card-actions {
+.card-actions,
+.rating-buttons {
   display: grid;
   gap: 10px;
 }
@@ -186,7 +197,8 @@ legend,
 .primary-button,
 .quiet-button,
 .bottom-nav button,
-.card-actions button {
+.card-actions button,
+.rating-buttons button {
   display: grid;
   align-items: center;
   justify-items: center;
@@ -205,6 +217,30 @@ legend,
   border: 2px solid #cfc8bb;
   background: #fffdf8;
   color: #2d3a35;
+}
+
+.rating-field {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.rating-buttons button {
+  min-height: 66px;
+  border: 2px solid #d8c58b;
+  background: #fff8db;
+  color: #d6a313;
+  font-size: 1.22rem;
+  letter-spacing: 0;
+}
+
+.rating-buttons button.selected {
+  border-color: #b87b00;
+  background: #ffe69a;
+  color: #b87500;
 }
 
 .record-list {
@@ -241,6 +277,14 @@ legend,
   margin: 8px 0;
   color: #35443f;
   font-size: 1rem;
+}
+
+.record-rating {
+  margin: 4px 0 6px;
+  color: #d19a00;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 0;
 }
 
 .card-actions button {

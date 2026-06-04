@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BookOpen, Clapperboard, Gamepad2, Heart, ListFilter, Pencil, Plus, Search, Trash2, X } from 'lucide-react';
+import { BookOpen, Clapperboard, Gamepad2, Heart, ListFilter, Pencil, Plus, Search, Star, Trash2, X } from 'lucide-react';
 import './styles.css';
 
 type Category = '読書' | '漫画' | '映画' | 'ドラマ' | 'ゲーム';
 type Feeling = 'よかった' | 'しんどい' | 'わくわく' | '泣いた' | '考えた' | '普通';
+type Rating = 1 | 2 | 3;
 
 type LogItem = {
   id: string;
   category: Category;
   title: string;
   amount: string;
+  rating: Rating;
   feeling: Feeling;
   note: string;
   createdAt: string;
@@ -24,10 +26,12 @@ const emptyDraft: Draft = {
   category: '読書',
   title: '',
   amount: '',
+  rating: 3,
   feeling: 'よかった',
   note: '',
 };
 const storageKey = 'movie-book-labo-records';
+const ratings: Rating[] = [1, 2, 3];
 
 const categoryIcon = {
   読書: BookOpen,
@@ -42,10 +46,17 @@ function loadRecords(): LogItem[] {
   if (!saved) return [];
 
   try {
-    return JSON.parse(saved) as LogItem[];
+    return (JSON.parse(saved) as LogItem[]).map((record) => ({
+      ...record,
+      rating: record.rating ?? 3,
+    }));
   } catch {
     return [];
   }
+}
+
+function ratingLabel(rating: Rating) {
+  return '★'.repeat(rating) + '☆'.repeat(3 - rating);
 }
 
 function App() {
@@ -105,6 +116,7 @@ function App() {
       category: record.category,
       title: record.title,
       amount: record.amount,
+      rating: record.rating,
       feeling: record.feeling,
       note: record.note,
     });
@@ -184,6 +196,24 @@ function App() {
               </select>
             </label>
 
+            <fieldset className="rating-field">
+              <legend>星</legend>
+              <div className="rating-buttons" aria-label="星評価">
+                {ratings.map((rating) => (
+                  <button
+                    className={draft.rating === rating ? 'selected' : ''}
+                    type="button"
+                    key={rating}
+                    onClick={() => setDraft((current) => ({ ...current, rating }))}
+                    aria-pressed={draft.rating === rating}
+                  >
+                    <Star size={32} fill="currentColor" aria-hidden="true" />
+                    {ratingLabel(rating)}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
             <label className="field">
               <span>気づき</span>
               <textarea
@@ -247,6 +277,7 @@ function App() {
                         <div>
                           <p className="record-category">{record.category}・{record.feeling}</p>
                           <h2>{record.title}</h2>
+                          <p className="record-rating" aria-label={`星${record.rating}`}>{ratingLabel(record.rating)}</p>
                           {record.amount && <p className="record-amount">{record.amount}</p>}
                           {record.note && <p className="record-note">{record.note}</p>}
                           <time>{new Date(record.createdAt).toLocaleDateString('ja-JP')}</time>
