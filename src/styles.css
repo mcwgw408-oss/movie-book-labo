@@ -32,7 +32,7 @@ textarea {
 }
 
 button {
-  min-height: 58px;
+  min-height: 50px;
   border: 0;
   cursor: pointer;
   touch-action: manipulation;
@@ -47,11 +47,11 @@ button {
 
 .phone-screen {
   min-height: 100dvh;
-  padding: calc(18px + env(safe-area-inset-top)) 18px calc(172px + env(safe-area-inset-bottom));
+  padding: calc(14px + env(safe-area-inset-top)) 14px calc(92px + env(safe-area-inset-bottom));
 }
 
 .top-area {
-  padding: 4px 0 18px;
+  padding: 2px 0 12px;
 }
 
 .app-kicker,
@@ -69,22 +69,22 @@ time {
 }
 
 h1 {
-  margin: 4px 0 6px;
+  margin: 4px 0 4px;
   color: #1f2a26;
-  font-size: 2rem;
+  font-size: 1.65rem;
   line-height: 1.15;
   letter-spacing: 0;
 }
 
 .screen-stack {
   display: grid;
-  gap: 18px;
+  gap: 13px;
 }
 
 .choice-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -95,9 +95,9 @@ legend,
 .field > span {
   grid-column: 1 / -1;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: #2f3d38;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 800;
 }
 
@@ -106,9 +106,9 @@ legend,
   display: grid;
   justify-items: center;
   align-items: center;
-  gap: 6px;
-  min-height: 108px;
-  padding: 12px 8px;
+  gap: 5px;
+  min-height: 76px;
+  padding: 10px 8px;
   border: 2px solid #d9d0c2;
   border-radius: 8px;
   background: #fffdf8;
@@ -133,8 +133,8 @@ legend,
 .record-icon {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
   background: #e3f2eb;
   color: #2d6a5f;
@@ -150,7 +150,7 @@ legend,
 .search-box,
 .select-wrap {
   width: 100%;
-  min-height: 62px;
+  min-height: 52px;
   border: 2px solid #cfc8bb;
   border-radius: 8px;
   background: #fffdf8;
@@ -162,21 +162,22 @@ legend,
 .field input,
 .field select,
 .field textarea {
-  padding: 15px 14px;
+  padding: 12px 13px;
 }
 
 .field textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
 }
 
 .search-box,
 .select-wrap {
   display: grid;
-  gap: 6px;
-  justify-items: start;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
   align-items: center;
   padding: 10px 14px;
+  color: #66736e;
 }
 
 .search-box input,
@@ -192,6 +193,33 @@ legend,
 .rating-buttons {
   display: grid;
   gap: 10px;
+}
+
+/* 編集・削除は横並びの控えめサイズに */
+.card-actions {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.card-actions button {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.card-actions button svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* 星評価は横1行3列に */
+.rating-buttons {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .primary-button,
@@ -229,12 +257,17 @@ legend,
 }
 
 .rating-buttons button {
-  min-height: 66px;
+  min-height: 50px;
   border: 2px solid #d8c58b;
   background: #fff8db;
   color: #d6a313;
-  font-size: 1.22rem;
+  font-size: 1rem;
   letter-spacing: 0;
+}
+
+.rating-buttons button svg {
+  width: 22px;
+  height: 22px;
 }
 
 .rating-buttons button.selected {
@@ -245,13 +278,13 @@ legend,
 
 .record-list {
   display: grid;
-  gap: 14px;
+  gap: 10px;
 }
 
 .record-card {
   display: grid;
-  gap: 14px;
-  padding: 16px;
+  gap: 10px;
+  padding: 12px;
   border: 2px solid #d9d0c2;
   border-radius: 8px;
   background: #fffdf8;
@@ -259,7 +292,7 @@ legend,
 
 .record-main {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -307,8 +340,9 @@ legend,
   bottom: 0;
   left: 0;
   display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   border-top: 2px solid #ded6c8;
   background: rgba(247, 243, 235, 0.96);
   backdrop-filter: blur(10px);
@@ -343,4 +377,10 @@ legend,
     font-weight: 900;
     text-align: center;
   }
+}
+
+
+.choice-icon svg {
+  width: 20px;
+  height: 20px;
 }
